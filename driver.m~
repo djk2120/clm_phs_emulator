@@ -1,0 +1,26 @@
+clear
+close all
+
+kmax  = 7e-9;
+krmax = 1e-9;
+lai   = 4;
+
+
+p       = 1;
+patchwt = [1];
+
+z     = 25;
+soillayers = (0:0.1:2)';
+soilz = 0.5*(soillayers(1:end-1)+soillayers(2:end));
+grav1 = soilz*1000;
+ns    = length(soilz);
+
+
+smp = zeros(ns,1)-10000;
+k_soil_root = krmax*ones(ns,1)./soilz;
+
+
+
+rootwp = -(q - sum(k_soil_root.*(smp(:)-grav1)))/sum(k_soil_root);
+qr     = 
+leafwp = rootwp-q/(lai*kmax/z);

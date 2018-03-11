@@ -1,0 +1,23 @@
+function psoil1 = bucket( psoil0,qr,dz,p )
+%bucket Simplified bucket model
+%   inputs
+%     psoil0, original soil water potential [MPa]
+%     q     , ET                            [mm/s]
+%     dz    , layer thickness               [m]
+
+qr = qr/1e3;  %convert to meters/s
+dt = 1800;   %timestep = 30minutes = 1800seconds
+
+
+b = 5;
+psat  = -.003;
+smsat = 0.5;
+
+sm0   = smsat.*(psoil0/psat).^(-1/b);
+sm1   = sm0-qr*dt./dz;
+
+if p>
+
+psoil1 = psat.*(sm1/smsat).^-b;
+
+end
