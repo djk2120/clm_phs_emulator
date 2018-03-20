@@ -1,6 +1,13 @@
 function [vwp,qr] = getvwp( q,smp,params )
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%getvwp Solve for vwp and qr, given a certain q
+%   Forced by a given transpiration flux and soil profile, solve for root
+%   and leaf water potential. Leaf water potential is used to prognose
+%   stress.
+%
+%   q   , [1]    , transpiration flux (mm/s)
+%   smp , [ns,1] , soil potential by soil layer    (mm)
+%   vwp , [2,1]  , root and leaf water potential   (mm)
+%   qr  , [ns,1] , root water uptake by soil layer (mm/s)
 
     k_soil_root = params{1};
     grav1       = params{2};
@@ -20,6 +27,6 @@ function [vwp,qr] = getvwp( q,smp,params )
     end
 
 
-    vwp = [rootwp;leafwp];
+    vwp = [leafwp,rootwp];
 end
 
